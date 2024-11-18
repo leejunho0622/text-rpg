@@ -76,7 +76,7 @@ public class BattleStage extends Stage implements MonsterManager{
 			}
 		}
 		if(monsterList.size() == 0) {
-			String textTitle = String.format("몬스터를 전부 처지했다!\n");
+			String textTitle = String.format("몬스터를 전부 처지했다!\n\n");
 			IOManager.append(textTitle);
 			return false;
 		}
@@ -91,6 +91,10 @@ public class BattleStage extends Stage implements MonsterManager{
 			printBattleMain();
 			for(int i=0; i<Guild.getPartySize(); i++) {
 				attackMenu(Guild.getPartyPlayerByIndex(i));
+			}
+			for(int i=0; i<monsterList.size(); i++) {
+				int ranTarget = ran.nextInt(Guild.getPartySize());
+				monsterList.get(i).attack(Guild.getPartyPlayerByIndex(ranTarget));
 			}
 		}
 		TextRPG.currnetStage = "LOBBY";
