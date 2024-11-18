@@ -17,6 +17,7 @@ public class TextRPG implements IOManager{
 	
 	private HashMap<String, Stage> stageList = new HashMap<String, Stage>();
 	
+	public static boolean playGame = true;
 	public static String currnetStage = "";
 	public static String beforeStage = "";
 	
@@ -31,12 +32,14 @@ public class TextRPG implements IOManager{
 		String stageInfo = String.format("[ %s → %s ]\n", beforeStage, currnetStage);
 		IOManager.append(stageInfo);
 		Stage stage = stageList.get(currnetStage);
-		currnetStage = beforeStage;
+		beforeStage = currnetStage;
 		stage.start();
 	}
 	
 	public void run() {
 		init();
-		changeStage();
+		while(playGame) {
+			changeStage();
+		}
 	}
 }
