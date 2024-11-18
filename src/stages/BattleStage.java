@@ -72,6 +72,7 @@ public class BattleStage extends Stage implements MonsterManager{
 			if(monsterList.get(i).getHp() <= 0) {
 				String textTitle = String.format("%s을(를) 처지했다!\n", monsterList.get(i).getName());
 				IOManager.append(textTitle);
+				reward(monsterList.get(i));
 				monsterList.remove(i);
 			}
 		}
@@ -82,6 +83,21 @@ public class BattleStage extends Stage implements MonsterManager{
 		}
 		
 		return true;
+	}
+	
+	private void reward(Monster target) {
+		int exp = 0;
+		
+		if(target.getName().equals("슬라임")) {
+			exp = target.getLevel() * 2;
+		}
+		
+		for(int i=0; i<Guild.getPartySize(); i++) {
+			Guild.getPartyPlayerByIndex(i).increaseExp(exp);
+		}
+		
+		String textTitle = String.format("파티원들의 경험치가 %d만큼 올랐다!\n\n", exp);
+		IOManager.append(textTitle);
 	}
 	
 	@Override
