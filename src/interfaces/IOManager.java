@@ -17,7 +17,6 @@ public interface IOManager {
 			writer.append(buffer);
 			writer.flush();
 			buffer.setLength(0);
-		} catch (IOException e) {
-		}
+		} catch (IOException e) {}
 	}
 }

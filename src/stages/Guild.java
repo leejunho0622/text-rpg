@@ -1,6 +1,8 @@
 package stages;
 
 import java.util.ArrayList;
+
+import interfaces.IOManager;
 import units.Player;
 
 public class Guild extends Stage{
@@ -44,9 +46,15 @@ public class Guild extends Stage{
 		return partyList.get(index);
 	}
 	
+	private void printGuildMain() {
+		String textTitle = String.format("====== Guild ====== [소지금 : %G]\n[길드원 영입]\t[길드원 추방]\n[파티 설정]\t[파티 추방]");
+		IOManager.append(textTitle);
+	}
+	
 	@Override
 	public void start() {
 		init();
+		printGuildMain();
 	}
 	
 }

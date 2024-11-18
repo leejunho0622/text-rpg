@@ -14,6 +14,8 @@ public class AnyStage extends Stage{
 	public void start() {
 		if(type.equals("INFO")) {}
 		else if(type.equals("SHOP")) {}
-		else if(type.equals("GUILD")) {}
+		else if(type.equals("GUILD")) {
+			
+		}
 	}
 }
