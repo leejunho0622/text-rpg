@@ -1,12 +1,12 @@
 package stages;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import interfaces.IOManager;
 import interfaces.MonsterManager;
 import textrpg.TextRPG;
 import units.Monster;
+import units.Player;
 
 public class BattleStage extends Stage implements MonsterManager{
 	private ArrayList<Monster> monsterList = new ArrayList<Monster>();
@@ -17,7 +17,7 @@ public class BattleStage extends Stage implements MonsterManager{
 	}
 	
 	private void setMonster() {
-		int playerLevel = Guild.getGuildPlayerByIndex(0).getLevel();
+		int playerLevel = Guild.getGuildPlayerByIndex(ran.nextInt(Guild.getPartySize())).getLevel();
 		for(int i=0; i<Guild.getPartySize(); i++) {
 			monsterList.add(MonsterManager.makeMonsters(playerLevel));
 		}
@@ -27,7 +27,7 @@ public class BattleStage extends Stage implements MonsterManager{
 		String textTitle1 = String.format("====== Player ======\n");
 		IOManager.append(textTitle1);
 		for (int i = 0; i < Guild.getPartySize(); i++) {
-			IOManager.append(Guild.getGuildPartyByIndex(i).toString()+"\n");
+			IOManager.append(Guild.getPartyPlayerByIndex(i).toString()+"\n");
 		}
 		String textTitle2 = String.format("====== Monster ======\n");
 		IOManager.append(textTitle2);
@@ -36,14 +36,63 @@ public class BattleStage extends Stage implements MonsterManager{
 		}
 	}
 	
+	private void attackMenu(Player player) {
+		while (true) {
+			try {
+				String textTitle = String.format("[공격]\t[스킬]\n");
+				IOManager.append(textTitle);
+
+				String input = reader.readLine();
+
+				if (input.equals("공격")) {
+					int ranTarget = ran.nextInt(monsterList.size());
+					player.attack(monsterList.get(ranTarget));
+					break;
+				} else if (input.equals("스킬")) {
+					break;
+				}
+
+			} catch (Exception e) {}
+		}
+	}
+	
+	private boolean checkHp() {
+		int count = 0;
+		for(int i=0; i<Guild.getPartySize();i++) {
+			if(Guild.getPartyPlayerByIndex(i).getHp() <= 0)
+				count++;
+		}
+		if(count == Guild.getPartySize()) {
+			String textTitle = String.format("파티는 전멸하였다.");
+			IOManager.append(textTitle);
+			return false;
+		}
+		
+		for(int i=0; i<monsterList.size();i++) {
+			if(monsterList.get(i).getHp() <= 0) {
+				String textTitle = String.format("%s을(를) 처지했다!\n", monsterList.get(i).getName());
+				IOManager.append(textTitle);
+				monsterList.remove(i);
+			}
+		}
+		if(monsterList.size() == 0) {
+			String textTitle = String.format("몬스터를 전부 처지했다!\n");
+			IOManager.append(textTitle);
+			return false;
+		}
+		
+		return true;
+	}
+	
 	@Override
 	public void start() {
 		setMonster();
-		printBattleMain();
-		try {
-			String input = reader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
+		while(checkHp()) {
+			printBattleMain();
+			for(int i=0; i<Guild.getPartySize(); i++) {
+				attackMenu(Guild.getPartyPlayerByIndex(i));
+			}
 		}
+		TextRPG.currnetStage = "LOBBY";
 	}
 }
