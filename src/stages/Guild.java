@@ -18,6 +18,16 @@ public class Guild extends Stage{
 		}
 	}
 	
+	public static void updateParty() {
+		partyList.clear();
+		if(!guildList.isEmpty()) {
+			for(int i=0; i<guildList.size(); i++) {
+				if(guildList.get(i).isParty())
+					partyList.add(guildList.get(i));
+			}
+		}
+	}
+	
 	public static void addGuildPlayer(Player player) {
 		guildList.add(player);
 	}
@@ -28,6 +38,10 @@ public class Guild extends Stage{
 	
 	public static Player getGuildPlayerByIndex(int index) {
 		return guildList.get(index);
+	}
+	
+	public static Player getPartyPlayerByIndex(int index) {
+		return partyList.get(index);
 	}
 	
 	@Override
