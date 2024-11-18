@@ -22,6 +22,10 @@ public class Guild extends Stage{
 		guildList.add(player);
 	}
 	
+	public static int getPartySize() {
+		return partyList.size();
+	}
+	
 	@Override
 	public void start() {
 		init();
