@@ -66,6 +66,10 @@ public abstract class Unit{
 		this.mp -= mp;
 	}
 	
+	public void increaseExp(int exp) {
+		this.exp += exp;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
