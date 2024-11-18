@@ -54,6 +54,18 @@ public abstract class Unit{
 		return this.party;
 	}
 	
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	
+	public void decreaseHp(int hp) {
+		this.hp -= hp;
+	}
+	
+	public void decreaseMp(int mp) {
+		this.mp -= mp;
+	}
+	
 	public String getName() {
 		return this.name;
 	}
