@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import units.Player;
 
 public class Guild extends Stage{
-	public static ArrayList<Player> guildList = new ArrayList<Player>();
-	public static ArrayList<Player> partyList = new ArrayList<Player>();
+	private static ArrayList<Player> guildList = new ArrayList<Player>();
+	private static ArrayList<Player> partyList = new ArrayList<Player>();
 	
 	@Override
 	public void init() {
@@ -16,6 +16,10 @@ public class Guild extends Stage{
 					partyList.add(guildList.get(i));
 			}
 		}
+	}
+	
+	public static void addGuildPlayer(Player player) {
+		guildList.add(player);
 	}
 	
 	@Override
