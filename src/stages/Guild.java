@@ -26,6 +26,10 @@ public class Guild extends Stage{
 		return partyList.size();
 	}
 	
+	public static Player getGuildPlayerByIndex(int index) {
+		return guildList.get(index);
+	}
+	
 	@Override
 	public void start() {
 		init();
