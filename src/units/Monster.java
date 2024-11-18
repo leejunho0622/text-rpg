@@ -14,7 +14,7 @@ public class Monster extends Unit{
 	
 	public void attack(Player target) {
 		int att = getDamage() - target.getDef();
-		String textTitle = String.format("%s에게 %d의 데미지!\n", target.getName(), att);
+		String textTitle = String.format("\n%s에게 %d의 데미지!\n\n", target.getName(), att);
 		IOManager.append(textTitle);
 		target.decreaseHp(att);
 		if(target.getHp() <= 0)
