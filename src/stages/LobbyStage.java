@@ -14,7 +14,7 @@ public class LobbyStage extends Stage{
 
 	public Player setUser() {
 		try {
-			String textTitle = String.format("====== TEXT RPG ======\n====== 직업 선택 ======\n[전사]\t[궁수]\t[마법사]\n");
+			String textTitle = String.format("====== TEXT RPG ======\n======= 직업 선택 =======\n[전사]\t[궁수]\t[마법사]\n");
 			IOManager.append(textTitle);
 			
 			String input = reader.readLine();
@@ -35,7 +35,8 @@ public class LobbyStage extends Stage{
 	
 	@Override
 	public void start() {
-		Guild.guildList.add(setUser());
+		Guild.addGuildPlayer(setUser());
+		Guild.updateParty();
 		while(true) {
 			try {
 				String textTitle = String.format("====== TEXT RPG ======\n[전투]\t[정보]\t[상점]\n[길드]\n");
