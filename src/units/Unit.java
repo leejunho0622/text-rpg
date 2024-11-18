@@ -53,4 +53,8 @@ public abstract class Unit{
 	public boolean isParty() {
 		return this.party;
 	}
+	
+	public int getPlayerLevel() {
+		return this.level;
+	}
 }
