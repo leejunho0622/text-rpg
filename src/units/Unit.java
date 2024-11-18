@@ -54,7 +54,40 @@ public abstract class Unit{
 		return this.party;
 	}
 	
-	public int getPlayerLevel() {
+	public String getName() {
+		return this.name;
+	}
+	
+	public String getJob() {
+		return this.job;
+	}
+	
+	public int getLevel() {
 		return this.level;
 	}
+	
+	public int getHp() {
+		return this.hp;
+	}
+	
+	public int getMp() {
+		return this.mp;
+	}
+	
+	public int getMaxHp() {
+		return this.maxHp;
+	}
+	
+	public int getMaxMp() {
+		return this.maxMp;
+	}
+	
+	public int getDamage() {
+		return this.damage;
+	}
+	
+	public int getDef() {
+		return this.def;
+	}
+	
 }
