@@ -7,6 +7,7 @@ import stages.Stage;
 import stages.TitleStage;
 import stages.LobbyStage;
 import stages.BattleStage;
+import stages.AnyStage;
 
 public class TextRPG implements IOManager{
 	private TextRPG() {}
@@ -25,6 +26,7 @@ public class TextRPG implements IOManager{
 		stageList.put("TITLE", new TitleStage());
 		stageList.put("LOBBY", new LobbyStage());
 		stageList.put("BATTLE", new BattleStage());
+		stageList.put("ANY", new AnyStage());
 		currnetStage = "TITLE";
 	}
 	
