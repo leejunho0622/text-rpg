@@ -20,13 +20,13 @@ public class LobbyStage extends Stage{
 			String input = reader.readLine();
 			
 			if(input.equals("전사")) {
-				return new Player("플레이어", "전사", 1300, 100, 100, 100);
+				return new Player("플레이어", "전사", 1300, 100, 100, 100, true);
 			}
 			else if(input.equals("궁수")) {
-				return new Player("플레이어", "궁수", 1150, 250, 130, 70);
+				return new Player("플레이어", "궁수", 1150, 250, 130, 70, true);
 			}
 			else if(input.equals("마법사")) {
-				return new Player("플레이어", "마법사", 1000, 400, 170, 30);
+				return new Player("플레이어", "마법사", 1000, 400, 170, 30, true);
 			}
 			
 		} catch (IOException e) {}

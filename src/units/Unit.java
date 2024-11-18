@@ -27,7 +27,7 @@ public abstract class Unit{
 	private int hpBouns;
 	private int mpBouns;
 	
-	public Unit(String name, String job, int hp, int mp, int damage, int def) {
+	public Unit(String name, String job, int hp, int mp, int damage, int def, boolean party) {
 		this.name = name;
 		this.job = job;
 		this.level = 1;
@@ -38,6 +38,7 @@ public abstract class Unit{
 		this.damage = damage;
 		this.def = def;
 		this.exp = 0;
+		this.party = party;
 	}
 
 	public Unit(String name, int level, int hp, int damage, int def) {
