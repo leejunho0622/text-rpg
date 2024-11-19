@@ -29,6 +29,10 @@ public class LobbyStage extends Stage{
 					TextRPG.currnetStage = "ANY";
 					AnyStage.type = "SHOP";
 					break;
+				}else if(input.equals("길드")) {
+					TextRPG.currnetStage = "ANY";
+					AnyStage.type = "GUILD";
+					break;
 				}
 				
 			}catch (Exception e) {}
