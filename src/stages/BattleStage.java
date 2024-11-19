@@ -41,16 +41,17 @@ public class BattleStage extends Stage implements MonsterManager{
 	private void attackMenu(Player player) {
 		while (true) {
 			try {
-				String textTitle = String.format("[공격]\t[스킬]\n");
+				String textTitle = String.format("[1.공격]\t[2.스킬]\n");
 				IOManager.append(textTitle);
 
 				String input = reader.readLine();
-
-				if (input.equals("공격")) {
+				int select = Integer.parseInt(input);
+				
+				if (select == 1) {
 					int ranTarget = ran.nextInt(monsterList.size());
 					player.attack(monsterList.get(ranTarget));
 					break;
-				} else if (input.equals("스킬")) {
+				} else if (select == 2) {
 					player.skill(monsterList);
 					break;
 				}
@@ -102,8 +103,16 @@ public class BattleStage extends Stage implements MonsterManager{
 		
 		for(int i=0; i<guild.getPartySize(); i++) {
 			guild.getPartyPlayerByIndex(i).increaseExp(exp);
+			checkExp(guild.getPartyPlayerByIndex(i));
 		}
 		Info.money += exp * 200;
+	}
+	
+	private void checkExp(Player player) {
+		if(player.getExp() >= 10) {
+			player.setExp(player.getExp()-10);
+			player.levelUp();
+		}
 	}
 	
 	@Override
@@ -114,10 +123,12 @@ public class BattleStage extends Stage implements MonsterManager{
 			for(int i=0; i<guild.getPartySize(); i++) {
 				attackMenu(guild.getPartyPlayerByIndex(i));
 			}
+			System.out.println();
 			for(int i=0; i<monsterList.size(); i++) {
 				int ranTarget = ran.nextInt(guild.getPartySize());
 				monsterList.get(i).attack(guild.getPartyPlayerByIndex(ranTarget));
 			}
+			System.out.println();
 		}
 		TextRPG.currnetStage = "LOBBY";
 	}
