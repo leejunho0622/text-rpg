@@ -1,8 +1,12 @@
 package units;
 
+import java.util.Random;
+
 import items.Item;
 
 public abstract class Unit{
+	public static Random ran = new Random();
+	
 	private String name;
 	private String job;
 	
@@ -59,6 +63,10 @@ public abstract class Unit{
 		this.hp = hp;
 	}
 	
+	public void setExp(int exp) {
+		this.exp = exp;
+	}
+	
 	public void decreaseHp(int hp) {
 		this.hp -= hp;
 	}
@@ -67,8 +75,36 @@ public abstract class Unit{
 		this.mp -= mp;
 	}
 	
+	public void decreaseMaxHp(int maxHp) {
+		this.maxHp -= maxHp;
+	}
+	
+	public void decreaseMaxMp(int maxMp) {
+		this.maxMp -= maxMp;
+	}
+	
 	public void increaseExp(int exp) {
 		this.exp += exp;
+	}
+	
+	public void increaseHp(int hp) {
+		this.hp += hp;
+	}
+	
+	public void increaseMp(int mp) {
+		this.mp += mp;
+	}
+	
+	public void increaseMaxHp(int maxHp) {
+		this.maxHp += maxHp;
+	}
+	
+	public void increaseMaxMp(int maxMp) {
+		this.maxMp += maxMp;
+	}
+	
+	public void increaseDamage(int damage) {
+		this.damage += damage;
 	}
 	
 	public String getName() {
@@ -81,6 +117,10 @@ public abstract class Unit{
 	
 	public int getLevel() {
 		return this.level;
+	}
+	
+	public int getExp() {
+		return this.exp;
 	}
 	
 	public int getHp() {
@@ -107,4 +147,7 @@ public abstract class Unit{
 		return this.def;
 	}
 	
+	public int getCrit() {
+		return this.crit;
+	}
 }
