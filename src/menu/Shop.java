@@ -63,7 +63,7 @@ public class Shop implements IOManager {
 		}
 	}
 
-	private void printItem(ArrayList<Item> list) {
+	public void printItem(ArrayList<Item> list) {
 		String textTitle = String.format("====== SHOP ======\n");
 		for (int i = 0; i < list.size(); i++) {
 			Item equipment = list.get(i);

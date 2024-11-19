@@ -3,12 +3,15 @@ package units;
 import java.util.ArrayList;
 
 import interfaces.IOManager;
+import items.Item;
 
 public class Player extends Unit {
 	public Player(String name, String job, int hp, int mp, int damage, int def, int crit, boolean party) {
 		super(name, job, hp, mp, damage, def, crit, party);
 	}
-
+	
+	public Item[] equipmentSlots = new Item[3]; // 0 : weapon, 1 : armor, 2 : artifact
+	
 	private int calculateDamage(Monster target, int critRate) {
 		int att = getDamage() - target.getDef();
 		if (att <= 0)

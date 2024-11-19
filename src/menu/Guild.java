@@ -94,7 +94,7 @@ public class Guild implements IOManager{
 		IOManager.append(textTitle);
 	}
 	
-	private void printPartyPlayerList() {
+	public void printPartyPlayerList() {
 		String textTitle = String.format("===== Guild =====\n");
 		for(int i=0; i<getPartySize(); i++) {
 			Player user = getPartyPlayerByIndex(i);
