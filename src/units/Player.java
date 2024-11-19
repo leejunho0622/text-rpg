@@ -3,8 +3,8 @@ package units;
 import interfaces.IOManager;
 
 public class Player extends Unit{
-	public Player(String name, String job, int hp, int mp, int damage, int def, boolean party) {
-		super(name, job, hp, mp, damage, def, party);
+	public Player(String name, String job, int hp, int mp, int damage, int def, int crit, boolean party) {
+		super(name, job, hp, mp, damage, def, crit, party);
 	}
 	
 	@Override

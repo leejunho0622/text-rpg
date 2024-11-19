@@ -22,13 +22,13 @@ public class TitleStage extends Stage{
 			String input = reader.readLine();
 			
 			if(input.equals("전사")) {
-				return new Player("플레이어", "전사", 1300, 100, 100, 100, true);
+				return new Player("플레이어", "전사", 1300, 100, 100, 100, 5, true);
 			}
 			else if(input.equals("궁수")) {
-				return new Player("플레이어", "궁수", 1150, 250, 130, 70, true);
+				return new Player("플레이어", "궁수", 1150, 250, 130, 70, 20, true);
 			}
 			else if(input.equals("마법사")) {
-				return new Player("플레이어", "마법사", 1000, 400, 170, 30, true);
+				return new Player("플레이어", "마법사", 1000, 400, 170, 30, 10, true);
 			}
 			
 		} catch (IOException e) {}
