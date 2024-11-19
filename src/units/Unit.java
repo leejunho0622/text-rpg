@@ -26,10 +26,10 @@ public abstract class Unit{
 	private Item armor;
 	private Item artifact;
 	
-	private int damageBouns;
-	private int armorBouns;
-	private int hpBouns;
-	private int mpBouns;
+	private int damageBonus;
+	private int armorBonus;
+	private int hpBonus;
+	private int mpBonus;
 	
 	public Unit(String name, String job, int hp, int mp, int damage, int def, int crit, boolean party) {
 		this.name = name;
@@ -128,27 +128,27 @@ public abstract class Unit{
 	}
 	
 	public int getHp() {
-		return this.hp;
+		return this.hp + hpBonus;
 	}
 	
 	public int getMp() {
-		return this.mp;
+		return this.mp + mpBonus;
 	}
 	
 	public int getMaxHp() {
-		return this.maxHp;
+		return this.maxHp + hpBonus;
 	}
 	
 	public int getMaxMp() {
-		return this.maxMp;
+		return this.maxMp + mpBonus;
 	}
 	
 	public int getDamage() {
-		return this.damage;
+		return this.damage + damageBonus;
 	}
 	
 	public int getDef() {
-		return this.def;
+		return this.def + armorBonus;
 	}
 	
 	public int getCrit() {
