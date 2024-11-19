@@ -136,7 +136,10 @@ public class Guild implements IOManager{
 			IOManager.append(textTitle);
 			return;
 		}
+		Info.money -= 5000;
 		addGuildPlayer(pickPlayer());
+		String textTitle = String.format("길드원 영입 성공!\n");
+		IOManager.append(textTitle);
 	}
 
 	private void deleteGuildPlayer() {
@@ -159,12 +162,6 @@ public class Guild implements IOManager{
 	}
 
 	private void setParty() {
-		if(getPartySize() == 1) {
-			String textTitle = String.format("현재 파티원이 1명입니다.\n");
-			IOManager.append(textTitle);
-			return;
-		}
-		
 		printGuildPlayerList();
 		try {
 			String input = reader.readLine();
