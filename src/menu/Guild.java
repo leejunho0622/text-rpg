@@ -1,4 +1,4 @@
-package stages;
+package menu;
 
 import java.io.IOException;
 import java.util.ArrayList;

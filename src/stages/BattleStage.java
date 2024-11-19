@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import interfaces.IOManager;
 import interfaces.MonsterManager;
+import menu.Guild;
 import textrpg.TextRPG;
 import units.Info;
 import units.Monster;

@@ -26,10 +26,10 @@ public abstract class Unit{
 	private Item armor;
 	private Item artifact;
 	
-	private int damageBonus;
-	private int armorBonus;
-	private int hpBonus;
-	private int mpBonus;
+	public int damageBonus;
+	public int armorBonus;
+	public int hpBonus;
+	public int mpBonus;
 	
 	public Unit(String name, String job, int hp, int mp, int damage, int def, int crit, boolean party) {
 		this.name = name;
@@ -63,6 +63,13 @@ public abstract class Unit{
 		this.damage += 5;
 		this.def += 2;
 		this.crit += 1;
+	}
+	
+	public void setItem(Item item) {
+		this.damageBonus += item.getDamageBonus();
+		this.armorBonus += item.getArmorBonus();
+		this.hpBonus += item.getHpBonus();
+		this.mpBonus += item.getMpBonus();
 	}
 	
 	public boolean isParty() {

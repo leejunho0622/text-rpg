@@ -3,6 +3,7 @@ package stages;
 import java.io.IOException;
 
 import interfaces.IOManager;
+import menu.Guild;
 import textrpg.TextRPG;
 import units.Player;
 

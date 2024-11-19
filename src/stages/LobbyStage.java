@@ -13,7 +13,7 @@ public class LobbyStage extends Stage {
 	public void start() {
 		while (true) {
 			try {
-				String textTitle = String.format("====== TEXT RPG ======\n[전투]\t[정보]\t[상점]\n[길드]\n");
+				String textTitle = String.format("====== TEXT RPG ======\n[전투]\t[정보]\t[장비]\n[상점]\t[길드]\n");
 				IOManager.append(textTitle);
 
 				String input = reader.readLine();
@@ -24,6 +24,10 @@ public class LobbyStage extends Stage {
 				} else if (input.equals("정보")) {
 					TextRPG.currnetStage = "ANY";
 					AnyStage.type = "INFO";
+					break;
+				} else if (input.equals("장비")) {
+					TextRPG.currnetStage = "ANY";
+					AnyStage.type = "EQUIP";
 					break;
 				} else if (input.equals("상점")) {
 					TextRPG.currnetStage = "ANY";

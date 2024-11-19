@@ -1,4 +1,4 @@
-package stages;
+package menu;
 
 import java.util.ArrayList;
 import java.util.Random;

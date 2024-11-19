@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import interfaces.IOManager;
 import items.Item;
-import stages.Guild;
+import menu.Guild;
 import textrpg.TextRPG;
 
 public class Info implements IOManager{

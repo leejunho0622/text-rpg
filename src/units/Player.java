@@ -4,16 +4,11 @@ import java.util.ArrayList;
 
 import interfaces.IOManager;
 
-public class Player extends Unit{
+public class Player extends Unit {
 	public Player(String name, String job, int hp, int mp, int damage, int def, int crit, boolean party) {
 		super(name, job, hp, mp, damage, def, crit, party);
 	}
-	
-	@Override
-	public String toString() {
-		return String.format("[%s][%s][Lv. %d]\n[HP:%d/%d][MP:%d/%d][%s:%d][%s:%d]", getName(), getJob(), getLevel(), getHp(), getMaxHp(), getMp(), getMaxMp(), "⚔️", getDamage(), "🛡️", getDef());
-	}
-	
+
 	private int calculateDamage(Monster target, int critRate) {
 		int att = getDamage() - target.getDef();
 		if (att <= 0)
@@ -60,6 +55,11 @@ public class Player extends Unit{
 				skillAttack(target, att);
 			}
 		}
+	}
 
+	@Override
+	public String toString() {
+		return String.format("[%s][%s][Lv. %d]\n[HP:%d/%d][MP:%d/%d][%s:%d][%s:%d]", getName(), getJob(), getLevel(),
+				getHp(), getMaxHp(), getMp(), getMaxMp(), "⚔️", getDamage(), "🛡️", getDef());
 	}
 }
