@@ -63,10 +63,10 @@ public class Shop implements IOManager {
 		}
 	}
 
-	private void printShopItem() {
+	private void printItem(ArrayList<Item> list) {
 		String textTitle = String.format("====== SHOP ======\n");
-		for (int i = 0; i < shop.size(); i++) {
-			Item equipment = shop.get(i);
+		for (int i = 0; i < list.size(); i++) {
+			Item equipment = list.get(i);
 			textTitle += String.format("[No.%d]\n[%s][%dG]\n", i + 1, equipment.getName(), equipment.getPrice());
 			if (equipment.getDamageBonus() > 0)
 				textTitle += String.format("[⚔️:%d]\n", equipment.getDamageBonus());
@@ -76,7 +76,7 @@ public class Shop implements IOManager {
 				textTitle += String.format("[HP:+%d]\n", equipment.getHpBonus());
 			if (equipment.getMpBonus() > 0)
 				textTitle += String.format("[MP:+%d]\n", equipment.getMpBonus());
-			if (i < shop.size() - 1)
+			if (i < list.size() - 1)
 				textTitle += String.format("------------------\n");
 		}
 		textTitle += String.format("==================\n");
@@ -84,21 +84,24 @@ public class Shop implements IOManager {
 	}
 
 	private void buyItem() {
-		printShopItem();
+		printItem(shop);
 		try {
 			String textTitle = String.format("구매할 아이템 번호 입력 >> \n");
 			IOManager.append(textTitle);
+
 			String input = reader.readLine();
 			int select = Integer.parseInt(input);
+
 			Item item = shop.get(select);
+
 			if (select >= 0 && select < shop.size()) {
 				if (Info.money >= item.getPrice()) {
 					Info.inventory.add(item);
 					Info.money -= item.getPrice();
 					textTitle = String.format("구매 성공 !\n");
 					IOManager.append(textTitle);
-				}else {
-					textTitle = String.format("소지금이 부족합니다\n");
+				} else {
+					textTitle = String.format("소지금이 부족합니다.\n");
 					IOManager.append(textTitle);
 				}
 			}
@@ -107,7 +110,24 @@ public class Shop implements IOManager {
 	}
 
 	private void sellItem() {
+		printItem(Info.inventory);
+		try {
+			String textTitle = String.format("판매할 아이템 번호 입력 >> \n");
+			IOManager.append(textTitle);
 
+			String input = reader.readLine();
+			int select = Integer.parseInt(input);
+
+			Item item = Info.inventory.get(select);
+
+			if (select >= 0 && select < Info.inventory.size()) {
+				Info.inventory.remove(select);
+				Info.money += item.getPrice();
+				textTitle = String.format("판매 성공 !\n");
+				IOManager.append(textTitle);
+			}
+		} catch (Exception e) {
+		}
 	}
 
 	private void printShopMenu() {
