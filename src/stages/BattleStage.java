@@ -51,6 +51,7 @@ public class BattleStage extends Stage implements MonsterManager{
 					player.attack(monsterList.get(ranTarget));
 					break;
 				} else if (input.equals("스킬")) {
+					player.skill(monsterList);
 					break;
 				}
 
