@@ -51,6 +51,10 @@ public class Guild implements IOManager{
 		return partyList.get(index);
 	}
 	
+	private void removeGuildPlayer(int index) {
+		guildList.remove(index);
+	}
+	
 	private void printGuildMain() {
 		while(true) {
 			try {
@@ -77,6 +81,28 @@ public class Guild implements IOManager{
 				
 			}catch (Exception e) {}
 		}
+	}
+	
+	private void printGuildPlayerList() {
+		String textTitle = String.format("===== Guild =====\n");
+		for(int i=0; i<getGuildSize(); i++) {
+			Player user = getGuildPlayerByIndex(i);
+			textTitle += String.format("[No. %d][%s:%s][Lv.%d]\n", i+1, user.getName(), user.getJob(), user.getLevel());
+		}
+		textTitle += String.format("==================\n");
+		textTitle += String.format("길드원 번호 입력 >> \n");
+		IOManager.append(textTitle);
+	}
+	
+	private void printPartyPlayerList() {
+		String textTitle = String.format("===== Guild =====\n");
+		for(int i=0; i<getPartySize(); i++) {
+			Player user = getPartyPlayerByIndex(i);
+			textTitle += String.format("[No. %d][%s:%s][Lv.%d]\n", i+1, user.getName(), user.getJob(), user.getLevel());
+		}
+		textTitle += String.format("==================\n");
+		textTitle += String.format("파티원 번호 입력 >> \n");
+		IOManager.append(textTitle);
 	}
 	
 	private Player pickPlayer() {
@@ -114,35 +140,67 @@ public class Guild implements IOManager{
 	}
 
 	private void deleteGuildPlayer() {
-		String textTitle = String.format("===== Guild =====\n");
-		for(int i=0; i<getGuildSize(); i++) {
-			Player user = getGuildPlayerByIndex(i);
-			textTitle += String.format("[No. %d][%s:%s][Lv.%d]\n", i+1, user.getName(), user.getJob(), user.getLevel());
+		if(getPartySize() == 1) {
+			String textTitle = String.format("파티원은 최소 1명입니다.\n");
 			IOManager.append(textTitle);
+			return;
 		}
-		textTitle += String.format("==================\n");
-		textTitle += String.format("길드원 번호 입력 >>\n");
-		IOManager.append(textTitle);
 		
+		printGuildPlayerList();
 		try {
 			String input = reader.readLine();
 			int select = Integer.parseInt(input)-1;
-			if(select >=1 && select <= getGuildSize())
+			if(select >= 0 && select < getGuildSize())
+				removeGuildPlayer(select);
+			else {
+				String textTitle = String.format("존재하지않는 길드원입니다.\n");
+				IOManager.append(textTitle);
+			}
 		} catch (IOException e) {}
-		
-		
 	}
 
 	private void setParty() {
-		
+		printGuildPlayerList();
+		try {
+			String input = reader.readLine();
+			int select = Integer.parseInt(input)-1;
+			if((select >= 0 && select < getGuildSize()) && getPartySize() < 4 && !getGuildPlayerByIndex(select).isParty())
+				getGuildPlayerByIndex(select).setParty();
+			else {
+				String textTitle = String.format("잘못된 입력입니다.\n");
+				IOManager.append(textTitle);
+			}
+		} catch (IOException e) {}
+		updateParty();
 	}
 
 	private void deletePartyPlayer() {
-		
+		printPartyPlayerList();
+		try {
+			String input = reader.readLine();
+			int select = Integer.parseInt(input)-1;
+			if((select >= 0 && select < getPartySize()) && getPartySize() > 1 && getPartyPlayerByIndex(select).isParty())
+				getPartyPlayerByIndex(select).setParty();
+			else {
+				String textTitle = String.format("잘못된 입력입니다.\n");
+				IOManager.append(textTitle);
+			}
+		} catch (IOException e) {}
+		updateParty();
 	}
 	
 	private void checkGuildPlayer() {
-		
+		printGuildPlayerList();
+		try {
+			String input = reader.readLine();
+			int select = Integer.parseInt(input)-1;
+			if((select >= 0 && select < getGuildSize()))
+				Info.printPlayerInfo(select);
+			else {
+				String textTitle = String.format("잘못된 입력입니다.\n");
+				IOManager.append(textTitle);
+			}
+		} catch (IOException e) {}
 	}
 	
 	public void start() {
