@@ -55,6 +55,16 @@ public abstract class Unit{
 		this.def = def;
 	}
 	
+	public void update() {
+		this.hp += 100;
+		this.maxHp += 100;
+		this.mp += 20;
+		this.maxMp += 20;
+		this.damage += 5;
+		this.def += 2;
+		this.crit += 1;
+	}
+	
 	public boolean isParty() {
 		return this.party;
 	}
@@ -69,6 +79,11 @@ public abstract class Unit{
 	
 	public void setExp(int exp) {
 		this.exp = exp;
+	}
+	
+	public void levelUp() {
+		update();
+		this.level++;
 	}
 	
 	public void decreaseHp(int hp) {
