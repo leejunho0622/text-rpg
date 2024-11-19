@@ -58,7 +58,7 @@ public class Guild implements IOManager{
 	private void printGuildMain() {
 		while(true) {
 			try {
-				String textTitle = String.format("====== Guild ====== [소지금 : %dG]\n[1. 길드원 영입]\t[2. 길드원 추방]\n[3. 파티 설정]\t[4. 파티 추방]\n[5. 프로필 확인]\t[0. 나가기]", Info.money);
+				String textTitle = String.format("====== Guild ====== [소지금 : %dG]\n[1. 길드원 영입]\t[2. 길드원 추방]\n[3. 파티 설정]\t[4. 파티 추방]\n[5. 프로필 확인]\t[0. 나가기]\n", Info.money);
 				IOManager.append(textTitle);
 				
 				String input = reader.readLine();
@@ -140,8 +140,8 @@ public class Guild implements IOManager{
 	}
 
 	private void deleteGuildPlayer() {
-		if(getPartySize() == 1) {
-			String textTitle = String.format("파티원은 최소 1명입니다.\n");
+		if(getGuildSize() == 1) {
+			String textTitle = String.format("길드원은 최소 1명입니다.\n");
 			IOManager.append(textTitle);
 			return;
 		}
@@ -150,40 +150,49 @@ public class Guild implements IOManager{
 		try {
 			String input = reader.readLine();
 			int select = Integer.parseInt(input)-1;
-			if(select >= 0 && select < getGuildSize())
-				removeGuildPlayer(select);
-			else {
-				String textTitle = String.format("존재하지않는 길드원입니다.\n");
+			if(select >= 0 && select < getGuildSize()) {
+				String textTitle = String.format("해당 길드원을 추방하였습니다.\n");
 				IOManager.append(textTitle);
+				removeGuildPlayer(select);
 			}
 		} catch (IOException e) {}
 	}
 
 	private void setParty() {
+		if(getPartySize() == 1) {
+			String textTitle = String.format("현재 파티원이 1명입니다.\n");
+			IOManager.append(textTitle);
+			return;
+		}
+		
 		printGuildPlayerList();
 		try {
 			String input = reader.readLine();
 			int select = Integer.parseInt(input)-1;
-			if((select >= 0 && select < getGuildSize()) && getPartySize() < 4 && !getGuildPlayerByIndex(select).isParty())
-				getGuildPlayerByIndex(select).setParty();
-			else {
-				String textTitle = String.format("잘못된 입력입니다.\n");
+			if((select >= 0 && select < getGuildSize()) && getPartySize() < 4 && !getGuildPlayerByIndex(select).isParty()) {
+				String textTitle = String.format("파티설정을 완료하였습니다.\n");
 				IOManager.append(textTitle);
+				getGuildPlayerByIndex(select).setParty();
 			}
 		} catch (IOException e) {}
 		updateParty();
 	}
 
 	private void deletePartyPlayer() {
+		if(getPartySize() == 1) {
+			String textTitle = String.format("현재 파티원이 1명입니다.\n");
+			IOManager.append(textTitle);
+			return;
+		}
+		
 		printPartyPlayerList();
 		try {
 			String input = reader.readLine();
 			int select = Integer.parseInt(input)-1;
-			if((select >= 0 && select < getPartySize()) && getPartySize() > 1 && getPartyPlayerByIndex(select).isParty())
-				getPartyPlayerByIndex(select).setParty();
-			else {
-				String textTitle = String.format("잘못된 입력입니다.\n");
+			if((select >= 0 && select < getPartySize()) && getPartySize() > 1 && getPartyPlayerByIndex(select).isParty()) {
+				String textTitle = String.format("해당 파티원을 추방하였습니다.\n");
 				IOManager.append(textTitle);
+				getPartyPlayerByIndex(select).setParty();
 			}
 		} catch (IOException e) {}
 		updateParty();
@@ -196,10 +205,6 @@ public class Guild implements IOManager{
 			int select = Integer.parseInt(input)-1;
 			if((select >= 0 && select < getGuildSize()))
 				Info.printPlayerInfo(select);
-			else {
-				String textTitle = String.format("잘못된 입력입니다.\n");
-				IOManager.append(textTitle);
-			}
 		} catch (IOException e) {}
 	}
 	
