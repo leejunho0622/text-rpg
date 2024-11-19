@@ -44,6 +44,8 @@ public class TitleStage extends Stage {
 				String input = reader.readLine();
 
 				if (input.equals("시작")) {
+					guild.addGuildPlayer(setUser());
+					guild.updateParty();
 					TextRPG.currnetStage = "LOBBY";
 					break;
 				} else if (input.equals("종료")) {
@@ -54,7 +56,5 @@ public class TitleStage extends Stage {
 			} catch (Exception e) {
 			}
 		}
-		guild.addGuildPlayer(setUser());
-		guild.updateParty();
 	}
 }
