@@ -59,6 +59,10 @@ public abstract class Unit{
 		return this.party;
 	}
 	
+	public void setParty() {
+		this.party = !party;
+	}
+	
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
