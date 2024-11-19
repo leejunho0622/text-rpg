@@ -7,6 +7,8 @@ import textrpg.TextRPG;
 import units.Player;
 
 public class TitleStage extends Stage{
+	private Guild guild = Guild.getInstance();
+	
 	@Override
 	public void init() {
 		TextRPG.currnetStage = "TITLE";
@@ -52,7 +54,7 @@ public class TitleStage extends Stage{
 			
 			}catch (Exception e) {}
 		}
-		Guild.addGuildPlayer(setUser());
-		Guild.updateParty();
+		guild.addGuildPlayer(setUser());
+		guild.updateParty();
 	}
 }

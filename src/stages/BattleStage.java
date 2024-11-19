@@ -11,6 +11,7 @@ import units.Player;
 
 public class BattleStage extends Stage implements MonsterManager{
 	private ArrayList<Monster> monsterList = new ArrayList<Monster>();
+	private Guild guild = Guild.getInstance();
 	
 	@Override
 	public void init() {
@@ -18,8 +19,8 @@ public class BattleStage extends Stage implements MonsterManager{
 	}
 	
 	private void setMonster() {
-		int playerLevel = Guild.getGuildPlayerByIndex(ran.nextInt(Guild.getPartySize())).getLevel();
-		for(int i=0; i<Guild.getPartySize(); i++) {
+		int playerLevel = guild.getGuildPlayerByIndex(ran.nextInt(guild.getPartySize())).getLevel();
+		for(int i=0; i<guild.getPartySize(); i++) {
 			monsterList.add(MonsterManager.makeMonsters(playerLevel));
 		}
 	}
@@ -27,8 +28,8 @@ public class BattleStage extends Stage implements MonsterManager{
 	private void printBattleMain() {
 		String textTitle1 = String.format("====== Player ======\n");
 		IOManager.append(textTitle1);
-		for (int i = 0; i < Guild.getPartySize(); i++) {
-			IOManager.append(Guild.getPartyPlayerByIndex(i).toString()+"\n");
+		for (int i = 0; i < guild.getPartySize(); i++) {
+			IOManager.append(guild.getPartyPlayerByIndex(i).toString()+"\n");
 		}
 		String textTitle2 = String.format("====== Monster ======\n");
 		IOManager.append(textTitle2);
@@ -59,11 +60,11 @@ public class BattleStage extends Stage implements MonsterManager{
 	
 	private boolean checkHp() {
 		int count = 0;
-		for(int i=0; i<Guild.getPartySize();i++) {
-			if(Guild.getPartyPlayerByIndex(i).getHp() <= 0)
+		for(int i=0; i<guild.getPartySize();i++) {
+			if(guild.getPartyPlayerByIndex(i).getHp() <= 0)
 				count++;
 		}
-		if(count == Guild.getPartySize()) {
+		if(count == guild.getPartySize()) {
 			String textTitle = String.format("파티는 전멸하였다.");
 			IOManager.append(textTitle);
 			return false;
@@ -98,8 +99,8 @@ public class BattleStage extends Stage implements MonsterManager{
 		String textTitle2 = String.format("파티원들의 경험치가 %d만큼 올랐다!\n\n", exp);
 		IOManager.append(textTitle2);
 		
-		for(int i=0; i<Guild.getPartySize(); i++) {
-			Guild.getPartyPlayerByIndex(i).increaseExp(exp);
+		for(int i=0; i<guild.getPartySize(); i++) {
+			guild.getPartyPlayerByIndex(i).increaseExp(exp);
 		}
 		Info.money += exp * 200;
 	}
@@ -109,12 +110,12 @@ public class BattleStage extends Stage implements MonsterManager{
 		setMonster();
 		while(checkHp()) {
 			printBattleMain();
-			for(int i=0; i<Guild.getPartySize(); i++) {
-				attackMenu(Guild.getPartyPlayerByIndex(i));
+			for(int i=0; i<guild.getPartySize(); i++) {
+				attackMenu(guild.getPartyPlayerByIndex(i));
 			}
 			for(int i=0; i<monsterList.size(); i++) {
-				int ranTarget = ran.nextInt(Guild.getPartySize());
-				monsterList.get(i).attack(Guild.getPartyPlayerByIndex(ranTarget));
+				int ranTarget = ran.nextInt(guild.getPartySize());
+				monsterList.get(i).attack(guild.getPartyPlayerByIndex(ranTarget));
 			}
 		}
 		TextRPG.currnetStage = "LOBBY";
