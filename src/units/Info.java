@@ -30,6 +30,9 @@ public class Info implements IOManager{
 			info += String.format("[Level : %d] [EXP : %d]\n",user.getLevel(), user.getExp());
 			info += String.format("[HP : %d/%d] [MP : %d/%d]\n", user.getHp(), user.getMaxHp(), user.getMp(), user.getMaxMp());
 			info += String.format("[⚔️ : %d] [🛡️ : %d] [💥 : %d]\n", user.getDamage(), user.getDef(), user.getCrit());
+			if(i < guild.getPartySize()-1) {
+				info += String.format("-------------------\n");
+			}
 		}
 		info += String.format("===================\n\n");
 		IOManager.append(info);
