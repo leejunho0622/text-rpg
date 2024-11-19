@@ -1,14 +1,18 @@
 package units;
 
+import java.util.ArrayList;
+
 import interfaces.IOManager;
+import items.Item;
 import stages.Guild;
 import textrpg.TextRPG;
 
 public class Info implements IOManager{
 	private Info() {}
-	
 	public static Info instance = new Info();
+	
 	public static int money;
+	public static ArrayList<Item> inventory = new ArrayList<Item>();
 	
 	private static Guild guild = Guild.getInstance();
 	
