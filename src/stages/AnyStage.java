@@ -19,7 +19,10 @@ public class AnyStage extends Stage{
 			Info info = Info.getInstance();
 			info.start();
 		}
-		else if(type.equals("SHOP")) {}
+		else if(type.equals("SHOP")) {
+			Shop shop = Shop.getInstance();
+			shop.start();
+		}
 		else if(type.equals("GUILD")) {
 			Guild guild = Guild.getInstance();
 			guild.start();
