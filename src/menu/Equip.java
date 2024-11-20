@@ -5,6 +5,12 @@ import units.Info;
 import units.Player;
 
 public class Equip implements IOManager{
+	private Equip() {}
+	public static Equip instance = new Equip();
+	public static Equip getInstance() {
+		return instance;
+	}
+	
 	private Guild guild = Guild.getInstance();
 	private Shop list = Shop.getInstance();
 	
