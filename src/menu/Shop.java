@@ -5,6 +5,7 @@ import java.util.Random;
 
 import interfaces.IOManager;
 import items.Item;
+import textrpg.TextRPG;
 import units.Info;
 
 public class Shop implements IOManager {
@@ -90,7 +91,7 @@ public class Shop implements IOManager {
 			IOManager.append(textTitle);
 
 			String input = reader.readLine();
-			int select = Integer.parseInt(input);
+			int select = Integer.parseInt(input)-1;
 
 			Item item = shop.get(select);
 
@@ -143,6 +144,7 @@ public class Shop implements IOManager {
 				} else if (input.equals("판매")) {
 					sellItem();
 				} else if (input.equals("나가기")) {
+					TextRPG.currnetStage = "LOBBY";
 					break;
 				}
 			} catch (Exception e) {
