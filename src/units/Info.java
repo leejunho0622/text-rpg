@@ -50,6 +50,19 @@ public class Info implements IOManager{
 		IOManager.append(info);
 	}
 	
+	public static void printPlayerEquipment(Player player) {
+		String info = "";
+		info += String.format("\n======= 장비 ======\n");
+		info += String.format("[1 Slot]\n");
+		info += String.format("[무기 : %s]\n", player.equipmentSlots[0].getName());
+		info += String.format("[2 Slot]\n");
+		info += String.format("[갑옷 : %s]\n", player.equipmentSlots[1].getName());
+		info += String.format("[3 Slot]\n");
+		info += String.format("[아티펙트 : %s]\n", player.equipmentSlots[2].getName());
+		info += String.format("====================\n");
+		IOManager.append(info);
+	}
+	
 	public void start() {
 		printInfo();
 		TextRPG.currnetStage = "LOBBY";
